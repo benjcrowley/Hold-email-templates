@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Holds</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function generateEmail() {
+            var emailText = "<p style='font-size: 14px; color: #333;'>Hello,</p>";
+            emailText += "<p style='font-size: 14px; color: #333;'>In order for us to continue our review of this application, please refer to the holds listed below:</p>";
+            emailText += "<ul style='font-size: 14px; color: #333;'>";
+
+            if (document.getElementById('name-mismatch').checked) {
+                emailText += "<li><span style='font-weight: bold;'>Name Change:</span> We have updated the application and loan documents to match the borrower’s <span style='font-style: italic;'>full</span> name as seen on their driver’s license; please <span style='font-weight: bold;'>reach out to the customer to resign their documents.</span></li>";
+            }
+            if (document.getElementById('voi').checked) {
+                emailText += "<li><span style='font-weight: bold;'>Verification of Income:</span> Please upload verification of income via paystub within the last 30 days, a 2022 tax return, or a 2022 W2 ($44,998.68 is needed to be verified)</li>";
+            }
+            // Add more conditions for other checkboxes here...
+
+            emailText += "</ul>";
+            emailText += "<p style='font-size: 14px; color: #333;'>Please advise if you would like our CSM team to continue to reach out as well to obtain the information needed.</p>";
+            emailText += "<p style='font-size: 14px; color: #333;'>Please feel free to upload and submit directly to the Enium Portal once the corrections have been made. If you have any questions or issues uploading to the portal, please feel free to contact us at 844-500-9695. We are always happy to help!</p>";
+            emailText += "<p style='font-size: 14px; color: #333;'>Please keep in mind all portal submission review requests sent to our Underwriting Team will be reviewed as soon as possible (excluding weekends, observed holidays, or business office closures).</p>";
+
+            document.getElementById('emailOutput').innerHTML = emailText;
+        }
+    </script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto p-6 bg-white shadow rounded">
+        <h1 class="text-xl font-bold mb-4">Application Holds</h1>
+
+        <div class="mb-4">
+            <input type="checkbox" id="name-mismatch" name="name-mismatch" />
+            <label for="name-mismatch">The Name does not match License</label>
+        </div>
+
+        <div class="mb-4">
+            <input type="checkbox" id="voi" name="voi" />
+            <label for="voi">Needs VOI</label>
+        </div>
+
+        <!-- Add more checkboxes here -->
+
+        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="generateEmail()">Submit</button>
+
+        <div id="emailOutput" class="mt-6 p-4 bg-gray-50 border rounded"></div>
+    </div>
+</body>
+</html>
