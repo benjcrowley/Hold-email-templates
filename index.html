@@ -26,6 +26,18 @@
 
             document.getElementById('emailOutput').innerHTML = emailText;
         }
+function copyToClipboard() {
+            var emailText = document.getElementById('emailOutput').innerText;
+            navigator.clipboard.writeText(emailText).then(function() {
+                var copyNotification = document.getElementById('copyNotification');
+                copyNotification.style.display = 'block';
+                setTimeout(function() {
+                    copyNotification.style.display = 'none';
+                }, 2000);
+            }, function(err) {
+                alert('Error in copying text: ' + err);
+            });
+        }
     </script>
 </head>
 <body class="bg-gray-100 p-6">
@@ -47,6 +59,9 @@
         <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="generateEmail()">Submit</button>
 
         <div id="emailOutput" class="mt-6 p-4 bg-gray-50 border rounded"></div>
-    </div>
+        <div id="copyNotification" style="display: none; margin-top: 10px; color: green;">Copied</div>
+        <button type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="copyToClipboard()">Copy Email Text</button>
+        
+
 </body>
 </html>
